@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+    --color-thewhite: oklch(94.91% 0 0);
+    --color-theblack: oklch(18.22% 0 0);
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+html, body {
+    @apply m-0 w-full h-full;
+}
+
+body {
+    @apply bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite;
+}
