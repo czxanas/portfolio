@@ -7,6 +7,9 @@
                 <!-- <div><span class="max-md:hidden">& </span>Artist by nature</div> -->
                  <div>Portfolio soon</div>
             </div>
+            <div class="pointer-events-auto flex gap-1.5">
+                <div id="theme-toggle" class="w-6 aspect-square rounded-full bg-thewhite border border-old cursor-pointer" />
+            </div>
         </div>
 
         <div class="pointer-events-auto">
@@ -14,3 +17,19 @@
         </div>
     </nav>
 </header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButton = document.getElementById("theme-toggle");
+      const htmlElement = document.documentElement;
+
+      const handleLightMode = () => {
+        const currentTheme = htmlElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+  
+        htmlElement.setAttribute("data-theme", newTheme);
+      }
+  
+      toggleButton?.addEventListener("click", handleLightMode);
+    });
+  </script>
