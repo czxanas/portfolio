@@ -27,35 +27,21 @@ const gridItems = Array.from({ length: 16 });
 <script>
     import gsap from "gsap";
 
-    let hoverTween: any = null; // Declare a variable to hold the GSAP animation
-
     document.addEventListener("DOMContentLoaded", function () {
         const imgWrap = document.getElementById("img-wrap");
         const squares = document.querySelectorAll(".squares");
 
-        const handleMouseEnter = () => {
-            // Kill any previous animation before starting the new one
-            if (hoverTween) hoverTween.kill();
+        // Create a timeline and keep it paused initially
+        const tl = gsap.timeline({ paused: true });
 
-            hoverTween = gsap.to(squares, {
-                opacity: 0,
-                duration: 0.3,
-                stagger: { amount: 0.5, from: "random" },
-            });
-        };
+        // Define the hover animation in the timeline
+        tl.to(squares, {
+            opacity: 0,
+            duration: 0.3,
+            stagger: { amount: 0.5, from: "random" },
+        });
 
-        const handleMouseLeave = () => {
-            // Kill any previous animation before starting the new one
-            if (hoverTween) hoverTween.kill();
-
-            gsap.to(squares, {
-                opacity: 1,
-                duration: 0.5,
-                stagger: { amount: 0.5, from: "random" },
-            });
-        };
-
-        imgWrap?.addEventListener("mouseenter", handleMouseEnter);
-        imgWrap?.addEventListener("mouseleave", handleMouseLeave);
+        imgWrap?.addEventListener("mouseenter", () => tl.restart());
+        imgWrap?.addEventListener("mouseleave", () => tl.reverse());
     });
 </script>
