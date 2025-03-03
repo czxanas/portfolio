@@ -50,3 +50,4 @@ header {
 :root[data-theme="dark"] #theme-toggle {
     @apply bg-thewhite;
 }
+
