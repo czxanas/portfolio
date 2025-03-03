@@ -28,7 +28,7 @@ body {
 }
 
 header {
-    @apply fixed top-0 left-0 w-full overflow-hidden px-edge mt-edge;
+    @apply sm:fixed top-0 left-0 w-full overflow-hidden px-edge mt-edge;
 }
 
 .flex-column {
