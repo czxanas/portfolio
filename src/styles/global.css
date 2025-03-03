@@ -13,16 +13,26 @@
 
 html {
     @apply font-rubik leading-[1.25rem];
+    font-size: clamp(12px, .9vw, 300px);
+    font-size: clamp(15px, 1vw, 24px);
 }
 
 body {
-    @apply min-h-[100dvh] bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite;
+    @apply w-full h-full bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite;
 }
 
 .main {
-    @apply w-full h-full p-edge;
+    @apply w-full min-h-[100dvh] h-[100dvh] p-edge;
 }
 
 header {
     @apply fixed top-0 left-0 w-full overflow-hidden px-edge mt-edge;
+}
+
+.flex-column {
+    @apply flex flex-col gap-3;
+}
+
+.list {
+    @apply flex flex-col gap-0.25;
 }
