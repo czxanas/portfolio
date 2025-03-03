@@ -1,16 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import "tailwindcss";
 
 @theme {
     --color-thewhite: oklch(94.91% 0 0);
     --color-theblack: oklch(18.22% 0 0);
+    --color-old: oklch(59.99% 0 0);
+    --spacing-edge: 1.25rem; /* 1.25rem = 20px */
+    --font-rubik: "Rubik", sans-serif;
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-html, body {
-    @apply m-0 w-full h-full;
+html {
+    @apply font-rubik leading-[1.25rem];
 }
 
 body {
-    @apply bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite;
+    @apply min-h-[100dvh] bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite;
+}
+
+.main {
+    @apply w-full h-full p-edge;
+}
+
+header {
+    @apply fixed top-0 left-0 w-full overflow-hidden px-edge mt-edge;
 }
