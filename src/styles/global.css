@@ -12,9 +12,9 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 html {
-    @apply font-rubik leading-[1.25rem];
-    font-size: clamp(12px, .9vw, 300px);
-    font-size: clamp(15px, 1vw, 24px);
+    /* @apply font-rubik leading-[1.25rem]; */
+    font-weight: 400;
+    font-size: clamp(14px, .5vw, 24px);
 }
 
 body {
