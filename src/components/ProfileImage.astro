@@ -33,7 +33,7 @@ const gridItems = Array.from({ length: 16 });
         const imgWrap = document.getElementById("img-wrap");
         const squares = document.querySelectorAll(".squares");
 
-        imgWrap?.addEventListener("mouseenter", () => {
+        const handleMouseEnter = () => {
             // Kill any previous animation before starting the new one
             if (hoverTween) hoverTween.kill();
 
@@ -42,9 +42,9 @@ const gridItems = Array.from({ length: 16 });
                 duration: 0.3,
                 stagger: { amount: 0.5, from: "random" },
             });
-        });
+        };
 
-        imgWrap?.addEventListener("mouseleave", () => {
+        const handleMouseLeave = () => {
             // Kill any previous animation before starting the new one
             if (hoverTween) hoverTween.kill();
 
@@ -53,6 +53,10 @@ const gridItems = Array.from({ length: 16 });
                 duration: 0.5,
                 stagger: { amount: 0.5, from: "random" },
             });
-        });
+        };
+
+        imgWrap?.addEventListener("mouseenter", handleMouseEnter);
+
+        imgWrap?.addEventListener("mouseleave", handleMouseLeave);
     });
 </script>
