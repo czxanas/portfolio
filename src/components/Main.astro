@@ -4,16 +4,18 @@ import { Image } from "astro:assets";
 
 <section class="w-full h-full">
     <div class="grid grid-cols-8 gap-2.5 h-full">
-        <div class="col-start-3 col-end-6 max-sm:col-start-1 max-md:col-end-9 max-md:mt-40 mb-12">
+        <div
+            class="col-start-3 col-end-6 max-sm:col-start-1 max-md:col-end-9 max-md:mt-40 mb-12"
+        >
             <div class="flex flex-col gap-12">
                 <div class="flex-column">
                     <div class="text-old">About</div>
                     <p class="max-w-md">
-                        I’m a frontend developer who loves making websites not
-                        just functional, but fun and engaging. I specialize in
-                        UI design and micro-interactions—think smooth
-                        animations, clever hover effects, and all those little
-                        details that make a site feel alive and engaging.
+                        I’m a frontend developer who brings websites to life—not
+                        just functional, but fun and immersive.<br/>I specialize in
+                        UI design and micro-interactions, crafting smooth
+                        animations, clever hover effects, and subtle details
+                        that make every experience feel dynamic and engaging.
                     </p>
                 </div>
 
@@ -21,26 +23,60 @@ import { Image } from "astro:assets";
                     <div class="text-old">Favorite projects</div>
                     <ul class="list">
                         <li><a href="#" class="cursor-wait">Motion</a></li>
-                        <li><a href="https://motion.ma" target="_blank" rel="noopener noreferrer">AH Design</a></li>
-                        <li><a href="https://www.drkhomanyoumaima.com" target="_blank" rel="noopener noreferrer">DrKhomany</a></li>
-                        <li><a href="https://heyanas.vercel.app" target="_blank" rel="noopener noreferrer">Oldfolio</a></li>
+                        <li>
+                            <a
+                                href="https://motion.ma"
+                                target="_blank"
+                                rel="noopener noreferrer">AH Design</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.drkhomanyoumaima.com"
+                                target="_blank"
+                                rel="noopener noreferrer">DrKhomany</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://heyanas.vercel.app"
+                                target="_blank"
+                                rel="noopener noreferrer">Oldfolio</a>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="flex-column">
                     <div class="text-old">Have fun</div>
                     <ul class="list">
-                        <li><a href="https://heyanas.webflow.io/" target="_blank" rel="noopener noreferrer">Popup Animation</a></li>
-                        <li><a href="https://monnnolith.webflow.io/" target="_blank" rel="noopener noreferrer">Flip Flap</a></li>
-                        <li><a href="https://eye-s-animation.vercel.app/dynwords" target="_blank" rel="noopener noreferrer">Fun Intended</a></li>
+                        <li>
+                            <a
+                                href="https://heyanas.webflow.io/"
+                                target="_blank"
+                                rel="noopener noreferrer">Popup Animation</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://monnnolith.webflow.io/"
+                                target="_blank"
+                                rel="noopener noreferrer">Flip Flap</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://eye-s-animation.vercel.app/dynwords"
+                                target="_blank"
+                                rel="noopener noreferrer">Fun Intended</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="col-start-3 col-end-9 max-sm:col-start-1 max-md:col-end-9 mt-auto">
+        <div
+            class="col-start-3 col-end-9 max-sm:col-start-1 max-md:col-end-9 mt-auto"
+        >
             <div class="flex justify-between items-end">
-                <div class="w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700">
+                <div
+                    class="w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700"
+                >
                     <Image
                         src={import("../assets/creativefrontdev.webp")}
                         alt="Creative Frontend Developer"
@@ -51,8 +87,13 @@ import { Image } from "astro:assets";
                 <div class="flex-column items-end">
                     <div class="text-old">More</div>
                     <ul class="list items-end">
-                        <li><a href="mailto:anas.frontdev@gmail.com">Mail</a></li>
-                        <li><a href="https://www.linkedin.com/in/anas-frontdev/">LinkedIn</a></li>
+                        <li>
+                            <a href="mailto:anas.frontdev@gmail.com">Mail</a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/anas-frontdev/"
+                                >LinkedIn</a>
+                        </li>
                     </ul>
                 </div>
             </div>
