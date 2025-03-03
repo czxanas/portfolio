@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import ProfileImage from "./ProfileImage.astro";
 ---
 
 <section class="w-full h-full">
@@ -74,15 +74,7 @@ import { Image } from "astro:assets";
             class="col-start-3 col-end-9 max-sm:col-start-1 max-md:col-end-9 mt-auto"
         >
             <div class="flex justify-between items-end">
-                <div
-                    class="w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700"
-                >
-                    <Image
-                        src={import("../assets/creativefrontdev.webp")}
-                        alt="Creative Frontend Developer"
-                        class="w-full h-full object-cover hidden"
-                    />
-                </div>
+                <ProfileImage />
 
                 <div class="flex-column items-end">
                     <div class="text-old">More</div>

@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+const gridItems = Array.from({ length: 16 });
+---
+
+<div
+    id="img-wrap"
+    class="relative w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700"
+>
+    <Image
+        src={import("../assets/creativefrontdev.webp")}
+        alt="Creative Frontend Developer"
+        class="w-full h-full object-cover"
+    />
+
+    <div class="absolute w-full h-full top-0 left-0 z-10">
+        <div class="grid grid-cols-4">
+            {
+                gridItems.map(() => (
+                    <div class="squares col-span-1 bg-orange-500 w-full aspect-square opacity-100" />
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    import gsap from "gsap";
+
+    let hoverTween: any = null; // Declare a variable to hold the GSAP animation
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const imgWrap = document.getElementById("img-wrap");
+        const squares = document.querySelectorAll(".squares");
+
+        imgWrap?.addEventListener("mouseenter", () => {
+            // Kill any previous animation before starting the new one
+            if (hoverTween) hoverTween.kill();
+
+            hoverTween = gsap.to(squares, {
+                opacity: 0,
+                duration: 0.3,
+                stagger: { amount: 0.5, from: "random" },
+            });
+        });
+
+        imgWrap?.addEventListener("mouseleave", () => {
+            // Kill any previous animation before starting the new one
+            if (hoverTween) hoverTween.kill();
+
+            gsap.to(squares, {
+                opacity: 1,
+                duration: 0.5,
+                stagger: { amount: 0.5, from: "random" },
+            });
+        });
+    });
+</script>
