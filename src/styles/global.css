@@ -5,7 +5,8 @@
     --color-thewhite: oklch(94.91% 0 0);
     --color-theblack: oklch(18.22% 0 0);
     --color-old: oklch(59.99% 0 0);
-    --spacing-edge: 1.25rem; /* 1.25rem = 20px */
+    --spacing-edge: 1.25rem;
+    /* 1.25rem = 20px */
     --font-rubik: "Rubik", sans-serif;
 }
 
@@ -19,7 +20,7 @@ html {
 }
 
 body {
-    @apply w-full h-full bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite;
+    @apply w-full h-full bg-thewhite text-theblack dark:bg-theblack dark:text-thewhite duration-200;
 }
 
 .main {
@@ -36,4 +37,16 @@ header {
 
 .list {
     @apply flex flex-col gap-0.25;
+}
+
+#theme-toggle {
+    @apply w-6 aspect-square rounded-full border border-old cursor-pointer duration-200;
+}
+
+:root[data-theme="light"] #theme-toggle {
+    @apply bg-theblack;
+}
+
+:root[data-theme="dark"] #theme-toggle {
+    @apply bg-thewhite;
 }
