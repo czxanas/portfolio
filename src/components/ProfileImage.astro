@@ -5,7 +5,7 @@ const gridItems = Array.from({ length: 16 });
 
 <div
     id="img-wrap"
-    class="relative w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700"
+    class="relative w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700 cursor-pointer"
 >
     <Image
         src={import("../assets/creativefrontdev.webp")}
@@ -56,7 +56,6 @@ const gridItems = Array.from({ length: 16 });
         };
 
         imgWrap?.addEventListener("mouseenter", handleMouseEnter);
-
         imgWrap?.addEventListener("mouseleave", handleMouseLeave);
     });
 </script>
