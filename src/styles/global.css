@@ -32,7 +32,11 @@ header {
 }
 
 .flex-column {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-3.5;
+
+    .list li a {
+        @apply block w-fit py-1 px-2 border border-dashed;
+    }
 }
 
 .list {
