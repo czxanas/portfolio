@@ -1,5 +1,26 @@
 ---
 import ProfileImage from "./ProfileImage.astro";
+
+const favoriteProjects = [
+    { title: "Motion", link: "https://motion.ma" },
+    { title: "DrKhomany", link: "https://www.drkhomanyoumaima.com" },
+    { title: "Oldfolio", link: "https://heyanas.vercel.app" },
+];
+
+const funnyProjects = [
+    { title: "Popup Animation", link: "https://heyanas.webflow.io/" },
+    { title: "Flip Flap", link: "https://monnnolith.webflow.io/" },
+    {
+        title: "Fun Intended",
+        link: "https://eye-s-animation.vercel.app/dynwords",
+    },
+    { title: "The Wave Animation", link: "https://anasfolio-one.vercel.app/" },
+];
+
+const moreList = [
+    { title: "Mail", link: "mailto:anas.frontdev@gmail.com" },
+    { title: "LinkedIn", link: "https://www.linkedin.com/in/anas-frontdev/" },
+];
 ---
 
 <section class="w-full h-full">
@@ -23,68 +44,40 @@ import ProfileImage from "./ProfileImage.astro";
                 <div class="flex-column">
                     <div class="text-old">Favorite projects</div>
                     <ul class="list">
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://motion.ma"
-                                target="_blank"
-                                rel="noopener noreferrer">Motion</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://www.drkhomanyoumaima.com"
-                                target="_blank"
-                                rel="noopener noreferrer">DrKhomany</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://heyanas.vercel.app"
-                                target="_blank"
-                                rel="noopener noreferrer">Oldfolio</a
-                            >
-                        </li>
+                        {
+                            favoriteProjects.map((favoriteProject) => (
+                                <li>
+                                    <a
+                                        data-shuffle-hover
+                                        href={favoriteProject.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {favoriteProject.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
 
                 <div class="flex-column">
                     <div class="text-old">Have fun</div>
                     <ul class="list">
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://heyanas.webflow.io/"
-                                target="_blank"
-                                rel="noopener noreferrer">Popup Animation</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://monnnolith.webflow.io/"
-                                target="_blank"
-                                rel="noopener noreferrer">Flip Flap</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://eye-s-animation.vercel.app/dynwords"
-                                target="_blank"
-                                rel="noopener noreferrer">Fun Intended</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://anasfolio-one.vercel.app/"
-                                target="_blank"
-                                rel="noopener noreferrer">The Wave Animation</a
-                            >
-                        </li>
+                        {
+                            funnyProjects.map((funnyProject) => (
+                                <li>
+                                    <a
+                                        data-shuffle-hover
+                                        href={funnyProject.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {funnyProject.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
             </div>
@@ -99,19 +92,15 @@ import ProfileImage from "./ProfileImage.astro";
                 <div class="flex-column items-end">
                     <div class="text-old">More</div>
                     <ul class="list items-end">
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="mailto:anas.frontdev@gmail.com">Mail</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                data-shuffle-hover
-                                href="https://www.linkedin.com/in/anas-frontdev/"
-                                >LinkedIn</a
-                            >
-                        </li>
+                        {
+                            moreList.map((moreItem) => (
+                                <li>
+                                    <a data-shuffle-hover href={moreItem.link}>
+                                        {moreItem.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
             </div>
