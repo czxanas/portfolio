@@ -5,7 +5,7 @@ const gridItems = Array.from({ length: 16 });
 
 <div
     id="img-wrap"
-    class="relative w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-orange-500 duration-700 cursor-pointer"
+    class="relative w-40 sm:w-50 md:w-60 aspect-square overflow-hidden bg-theblack dark:bg-thewhite duration-700 cursor-pointer"
 >
     <Image
         src={import("../assets/creativefrontdev.webp")}
@@ -17,7 +17,7 @@ const gridItems = Array.from({ length: 16 });
         <div class="grid grid-cols-4">
             {
                 gridItems.map(() => (
-                    <div class="squares col-span-1 bg-orange-500 w-full aspect-square opacity-100" />
+                    <div class="squares col-span-1 bg-theblack dark:bg-thewhite w-full aspect-square opacity-100" />
                 ))
             }
         </div>
@@ -37,7 +37,8 @@ const gridItems = Array.from({ length: 16 });
         // Define the hover animation in the timeline
         tl.to(squares, {
             opacity: 0,
-            duration: 0.3,
+            duration: 0.2,
+            ease: "bounce.in",
             stagger: { amount: 0.5, from: "random" },
         });
 
