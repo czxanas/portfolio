@@ -1,8 +1,7 @@
 ---
 import Header from "../components/Header.astro";
+import FixedGrid from "../components/SmallComponents/FixedGrid.astro";
 import "../styles/global.css";
-
-const gridItems = Array.from({ length: 8 });
 ---
 
 <!doctype html>
@@ -26,9 +25,7 @@ const gridItems = Array.from({ length: 8 });
 		<Header />
 		<main class="main">
 			<slot />
-			<div class="f-grid">
-				<ul>{gridItems.map(() => <li />)}</ul>
-			</div>
+			<FixedGrid />
 		</main>
 	</body>
 </html>

@@ -1,0 +1,29 @@
+---
+let gridItems = Array.from({ length: 8 }); // Default 8 items
+---
+
+<div id="grid-container" class="f-grid">
+    <ul>
+        {gridItems.map(() => <li />)}
+    </ul>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const gridContainer: any = document.querySelector("#grid-container ul");
+
+        function updateGridItems() {
+            const isMobile = window.matchMedia("(max-width: 767px)").matches;
+            const itemCount = isMobile ? 4 : 8; // 4 items on mobile, 8 on larger screens
+
+            gridContainer.innerHTML = ""; // Clear existing items
+            for (let i = 0; i < itemCount; i++) {
+                const li = document.createElement("li");
+                gridContainer.appendChild(li);
+            }
+        }
+
+        updateGridItems(); // Run on page load
+        window.addEventListener("resize", updateGridItems); // Update on resize
+    });
+</script>

@@ -28,7 +28,7 @@ body {
 }
 
 header {
-    @apply sm:fixed top-0 left-0 w-full overflow-hidden px-edge mt-edge;
+    @apply sm:fixed sm:top-0 sm:left-0 w-full overflow-hidden px-edge pt-edge;
 }
 
 .flex-column {
@@ -59,10 +59,10 @@ header {
     @apply fixed top-0 left-0 w-full h-full px-edge -z-10 pointer-events-none;
 
     ul {
-        @apply grid grid-cols-8 gap-2.5 w-full h-full;
+        @apply grid grid-cols-4 md:grid-cols-8 gap-2.5 w-full h-full;
 
         li {
-            @apply border-x border-dashed border-theblack/20 dark:border-thewhite/20
+            @apply col-span-1 border-x border-dashed border-theblack/20 dark:border-thewhite/20
         }
     }
 }
