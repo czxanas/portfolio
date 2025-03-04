@@ -24,7 +24,7 @@ body {
 }
 
 .main {
-    @apply w-full min-h-[100dvh] h-[100dvh] p-edge;
+    @apply relative w-full min-h-[100dvh] h-[100dvh] p-edge;
 }
 
 header {
@@ -55,3 +55,14 @@ header {
     @apply bg-thewhite;
 }
 
+.f-grid {
+    @apply fixed top-0 left-0 w-full h-full px-edge -z-10 pointer-events-none;
+
+    ul {
+        @apply grid grid-cols-8 gap-2.5 w-full h-full;
+
+        li {
+            @apply border-x border-dashed border-theblack/20 dark:border-thewhite/20
+        }
+    }
+}

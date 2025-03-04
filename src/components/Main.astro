@@ -1,26 +1,9 @@
 ---
 import ProfileImage from "./ProfileImage.astro";
-
-const favoriteProjects = [
-    { title: "Motion", link: "https://motion.ma" },
-    { title: "DrKhomany", link: "https://www.drkhomanyoumaima.com" },
-    { title: "Oldfolio", link: "https://heyanas.vercel.app" },
-];
-
-const funnyProjects = [
-    { title: "Popup Animation", link: "https://heyanas.webflow.io/" },
-    { title: "Flip Flap", link: "https://monnnolith.webflow.io/" },
-    {
-        title: "Fun Intended",
-        link: "https://eye-s-animation.vercel.app/dynwords",
-    },
-    { title: "The Wave Animation", link: "https://anasfolio-one.vercel.app/" },
-];
-
-const moreList = [
-    { title: "Mail", link: "mailto:anas.frontdev@gmail.com" },
-    { title: "LinkedIn", link: "https://www.linkedin.com/in/anas-frontdev/" },
-];
+import AboutAnas from "./SmallComponents/AboutAnas.astro";
+import FavoriteProjects from "./SmallComponents/FavoriteProjects.astro";
+import HaveFun from "./SmallComponents/HaveFun.astro";
+import More from "./SmallComponents/More.astro";
 ---
 
 <section class="w-full h-full">
@@ -29,57 +12,9 @@ const moreList = [
             class="col-start-3 col-end-6 max-sm:col-start-1 max-md:col-end-9 mt-12 sm:mt-40 md:mt-0 mb-12"
         >
             <div class="flex flex-col gap-12">
-                <div class="flex-column">
-                    <div class="text-old">About</div>
-                    <p class="max-w-md">
-                        I’m a frontend developer who brings websites to life—not
-                        just functional, but fun and immersive.<br />I
-                        specialize in UI design and micro-interactions, crafting
-                        smooth animations, clever hover effects, and subtle
-                        details that make every experience feel dynamic and
-                        engaging.
-                    </p>
-                </div>
-
-                <div class="flex-column">
-                    <div class="text-old">Favorite projects</div>
-                    <ul class="list">
-                        {
-                            favoriteProjects.map((favoriteProject) => (
-                                <li>
-                                    <a
-                                        data-shuffle-hover
-                                        href={favoriteProject.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {favoriteProject.title}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
-
-                <div class="flex-column">
-                    <div class="text-old">Have fun</div>
-                    <ul class="list">
-                        {
-                            funnyProjects.map((funnyProject) => (
-                                <li>
-                                    <a
-                                        data-shuffle-hover
-                                        href={funnyProject.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {funnyProject.title}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
+                <AboutAnas />
+                <FavoriteProjects />
+                <HaveFun />
             </div>
         </div>
 
@@ -88,56 +23,13 @@ const moreList = [
         >
             <div class="flex justify-between items-end">
                 <ProfileImage />
-
-                <div class="flex-column items-end">
-                    <div class="text-old">More</div>
-                    <ul class="list items-end">
-                        {
-                            moreList.map((moreItem) => (
-                                <li>
-                                    <a data-shuffle-hover href={moreItem.link}>
-                                        {moreItem.title}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
+                <More />
             </div>
         </div>
     </div>
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { generateRandomWord } from "../utils/random";
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const shuffleAnimation = () => {
-            const shuffleElems = gsap.utils.toArray("[data-shuffle-hover]");
-            const duration = 50;
-            const stopAfter = 250;
-            shuffleElems.forEach((elem: any, index: number) => {
-                const original = elem.innerText;
-                let intervalId: any;
-                elem.addEventListener("mouseenter", () => {
-                    intervalId = setInterval(() => {
-                        const WORDS_STOCK_ARRAY = original.split("");
-                        const NEW_WORD = generateRandomWord(WORDS_STOCK_ARRAY);
-                        elem.innerText = NEW_WORD;
-                    }, duration);
-                    // Stop the interval after 1000 ms (1 second)
-                    setTimeout(() => {
-                        clearInterval(intervalId);
-                        elem.innerText = original;
-                    }, stopAfter);
-                });
-                elem.addEventListener("mouseleave", () => {
-                    clearInterval(intervalId); // Stops the interval
-                    elem.innerText = original;
-                });
-            });
-        };
-        shuffleAnimation();
-    });
+    import { shuffleAnimation } from "../utils/shuffle";
+    document.addEventListener("DOMContentLoaded", shuffleAnimation);
 </script>

@@ -1,6 +1,8 @@
 ---
 import Header from "../components/Header.astro";
 import "../styles/global.css";
+
+const gridItems = Array.from({ length: 8 });
 ---
 
 <!doctype html>
@@ -24,6 +26,9 @@ import "../styles/global.css";
 		<Header />
 		<main class="main">
 			<slot />
+			<div class="f-grid">
+				<ul>{gridItems.map(() => <li />)}</ul>
+			</div>
 		</main>
 	</body>
 </html>

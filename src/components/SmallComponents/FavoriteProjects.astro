@@ -1,0 +1,27 @@
+---
+const favoriteProjects = [
+    { title: "Motion", link: "https://motion.ma" },
+    { title: "DrKhomany", link: "https://www.drkhomanyoumaima.com" },
+    { title: "Oldfolio", link: "https://heyanas.vercel.app" },
+];
+---
+
+<div class="flex-column">
+    <div class="text-old">Favorite projects</div>
+    <ul class="list">
+        {
+            favoriteProjects.map((favoriteProject) => (
+                <li>
+                    <a
+                        data-shuffle-hover
+                        href={favoriteProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {favoriteProject.title}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</div>

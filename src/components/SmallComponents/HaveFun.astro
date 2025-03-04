@@ -1,0 +1,31 @@
+---
+const funnyProjects = [
+    { title: "Popup Animation", link: "https://heyanas.webflow.io/" },
+    { title: "Flip Flap", link: "https://monnnolith.webflow.io/" },
+    {
+        title: "Fun Intended",
+        link: "https://eye-s-animation.vercel.app/dynwords",
+    },
+    { title: "The Wave Animation", link: "https://anasfolio-one.vercel.app/" },
+];
+---
+
+<div class="flex-column">
+    <div class="text-old">Have fun</div>
+    <ul class="list">
+        {
+            funnyProjects.map((funnyProject) => (
+                <li>
+                    <a
+                        data-shuffle-hover
+                        href={funnyProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {funnyProject.title}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</div>

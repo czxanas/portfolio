@@ -1,0 +1,21 @@
+---
+const moreList = [
+    { title: "Mail", link: "mailto:anas.frontdev@gmail.com" },
+    { title: "LinkedIn", link: "https://www.linkedin.com/in/anas-frontdev/" },
+];
+---
+
+<div class="flex-column items-end">
+    <div class="text-old">More</div>
+    <ul class="list items-end">
+        {
+            moreList.map((moreItem) => (
+                <li>
+                    <a data-shuffle-hover href={moreItem.link}>
+                        {moreItem.title}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</div>
