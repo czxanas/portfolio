@@ -43,5 +43,10 @@ const gridItems = Array.from({ length: 16 });
 
         imgWrap?.addEventListener("mouseenter", () => tl.restart());
         imgWrap?.addEventListener("mouseleave", () => tl.reverse());
+        imgWrap?.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Prevents accidental scroll on touch
+            tl.restart();
+        });
+        imgWrap?.addEventListener("touchend", () => tl.reverse());
     });
 </script>
