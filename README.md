@@ -13,7 +13,7 @@ Welcome to my portfolio! I'm a frontend developer passionate about crafting **im
 
 ## ✨ Featured Projects  
 🔹 **[motion](https://motion.ma/)** – A portfolio for a motion design agency.  
-🔹 **[my old portfolio](https://heyanas.vercel.app/)** – Another cool project with a brief highlight on some of my old work.  
+🔹 **[old portfolio](https://heyanas.vercel.app/)** – Another cool project with a brief highlight on some of my old work.  
 
 ## 📫 Get in Touch  
 - 🌐 **[Portfolio](https://helloanas.vercel.app/)**  
