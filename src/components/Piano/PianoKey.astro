@@ -1,11 +1,12 @@
 ---
 // Props
-const { class: customClass = '', black = false, key, ...rest } = Astro.props;
+const { class: customClass = '', black = false, letter, key, ...rest } = Astro.props;
 ---
 
 <div class:list={['white-key relative w-full h-full border-x border-black/10 bg-[#ECEDDF]', customClass]}>
+      <span class="block w-fit p-1">{letter}</span>
       {black && <div class="black-key w-1/2 h-1/4 absolute right-0 bottom-0 translate-x-1/2 bg-black z-50 text-white text-sm">
-        {/* <span class="block w-fit p-1">{key}</span> */}
+        <span class="block w-fit p-1">{key}</span>
       </div>}
 </div>
 
