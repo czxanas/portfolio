@@ -1,0 +1,143 @@
+---
+// Props
+const { class: customClass = '', black = false, key, ...rest } = Astro.props;
+---
+
+<div class:list={['white-key relative w-full h-full border-x border-black/10 bg-[#ECEDDF]', customClass]}>
+      {black && <div class="black-key w-1/2 h-1/4 absolute right-0 bottom-0 translate-x-1/2 bg-black z-50 text-white text-sm">
+        {/* <span class="block w-fit p-1">{key}</span> */}
+      </div>}
+</div>
+
+<script>
+      import gsap from 'gsap';
+      const musics = [
+            '/audios/a6-01.mp3',
+            '/audios/a6-02.mp3',
+            '/audios/b6-01.mp3',
+            '/audios/c6-01.mp3',
+            '/audios/d6-01.mp3',
+            '/audios/d6-02.mp3',
+            '/audios/e6-01.mp3',
+            '/audios/f6-01.mp3',
+            '/audios/g6-01.mp3',
+            '/audios/g6-02.mp3'
+      ];
+      const notes = [
+            '/audios/fiveteen/c.mp3',
+            '/audios/fiveteen/ca.mp3',
+            '/audios/fiveteen/cste.mp3',
+            '/audios/fiveteen/de.mp3',
+            '/audios/fiveteen/do.mp3',
+            '/audios/fiveteen/doin.mp3',
+            '/audios/fiveteen/fa.mp3',
+            '/audios/fiveteen/fas.mp3',
+            '/audios/fiveteen/la.mp3',
+            '/audios/fiveteen/mi.mp3',
+            '/audios/fiveteen/no.mp3',
+            '/audios/fiveteen/not.mp3',
+            '/audios/fiveteen/octa.mp3',
+            '/audios/fiveteen/re.mp3',
+            '/audios/fiveteen/sol.mp3'
+      ];
+      const blackKeys = gsap.utils.toArray('.white-key .black-key') as HTMLElement[];
+      const fifteenKeys = gsap.utils.toArray('.white-key') as HTMLElement[];
+
+      // Define the keys from your keyboard you want to use:
+      const keyBindings = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'd', 'f', 'g', 'h', 'j'];
+
+      const rainbowColors = [
+            '#FF0000', // red
+            '#FF7F00', // orange
+            '#FFFF00', // yellow
+            '#00FF00', // green
+            '#0000FF', // blue
+            '#4B0082', // indigo
+            '#8F00FF' // violet
+      ];
+
+      const randomColor = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+
+      // Function to animate any key
+      const animateKey = (el: HTMLElement) => {
+            return gsap.fromTo(
+                  el,
+                  { height: '25%', backgroundColor: 'black' },
+                  {
+                        height: '24%',
+                        backgroundColor: '#2a2a2a',
+                        duration: 0.1,
+                        ease: 'power1.out',
+                        yoyo: true,
+                        repeat: 1
+                  }
+            );
+      };
+      const animateKeyColor = (el: HTMLElement) => {
+            const rainbowColors = [
+                  '#FFB3BA', // Soft Red
+                  '#FFD9B3', // Soft Orange
+                  '#FFFFB3', // Soft Yellow
+                  '#B3FFB3', // Soft Green
+                  '#B3D9FF', // Soft Blue
+                  '#D1B3FF', // Soft Indigo
+                  '#FFB3FF' // Soft Violet
+            ];
+
+            const randomColor = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+
+            return gsap.fromTo(
+                  el,
+                  { backgroundColor: '#ECEDDF' }, // default
+                  {
+                        backgroundColor: randomColor, // random rainbow color
+                        duration: 0.1,
+                        ease: 'power1.out',
+                        yoyo: true,
+                        repeat: 1
+                  }
+            );
+      };
+
+      const playAudio = (src: any) => {
+            const audio = new Audio(src);
+            audio.currentTime = 0;
+            audio.play();
+      };
+
+      blackKeys.forEach((key, index) => {
+            key.addEventListener('click', (event) => {
+                  event.stopPropagation(); // ⛔ Prevent parent click event
+                  playAudio(musics[index]);
+                  // Use your reusable animation
+                  animateKey(key);
+            });
+      });
+
+      // Keyboard mapping — '1' to '9', then '0' → indexes 0 to 9
+      window.addEventListener('keydown', (e) => {
+            const keyMap = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+            const index = keyMap.indexOf(e.key);
+            if (index !== -1 && musics[index] && blackKeys[index]) {
+                  playAudio(musics[index]);
+                  animateKey(blackKeys[index] as HTMLElement);
+            }
+      });
+
+      // Click events
+      fifteenKeys.forEach((key, index) => {
+            key.addEventListener('click', () => {
+                  playAudio(notes[index]);
+                  animateKeyColor(key);
+            });
+      });
+
+      // Keyboard support
+      window.addEventListener('keydown', (e) => {
+            const keyIndex = keyBindings.indexOf(e.key.toLowerCase());
+            if (keyIndex !== -1 && notes[keyIndex] && fifteenKeys[keyIndex]) {
+                  playAudio(notes[keyIndex]);
+                  animateKeyColor(fifteenKeys[keyIndex]);
+            }
+      });
+</script>

@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:root {
+    --unit-sm: 10px;
+    --unit-united: 300px;
+}
+
+@theme {
+    --spacing-unit-sm: var(--unit-sm);
+    --spacing-united: var(--unit-united); /* 300px */
+    --spacing-united-per-two: calc(var(--unit-united) / 2); /* 300px / 2 = 150px */
+    --spacing-gutter: calc(var(--unit-sm) * 8);
+}
