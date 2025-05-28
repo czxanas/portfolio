@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <section class="w-full h-full flex items-center justify-center whitee" style="background-color: oklch(0.2 0 0);">
+        <div class="container max-w-xl mix-blend-difference bg-transparent text-white select-none">
+            <h1 class="text-6xl mb-5">Lightness</h1>
+            <p class="text-lg text-white/60 font-extralight">
+                Lightness in web design means creating clean, fast, and minimal experiences. It
+                focuses on clarity, quick loading, and smooth interactions to keep users engaged
+                without distraction.
+            </p>
+        </div>
+
+        <div class="absolute bottom-5 left-5 z-50">
+            <div
+                id="lightness"
+                class="relative w-20 h-40 rounded-4xl border border-black/10 overflow-hidden shadow-xl shadow-black/15"
+            >
+                <div class="absolute top-0 left-0 w-full h-full bg-zinc-600 blur-2xl select-none pointer-events-none" />
+                <div
+                    id="light-bar"
+                    class="absolute bottom-0 left-0 w-full h-2/10 rounded-t-xl bg-white"
+                >
+                    <div
+                        class="light-circle absolute top-3 left-1/2 w-5 h-1 -translate-1/2 rounded-full bg-black/40 pointer-events-none select-none opacity-20"
+                    >
+                    </div>
+                </div>
+                <div
+                    class="light-circle absolute bottom-2 left-1/2 w-5 h-5 -translate-1/2 rounded-full border-2 border-black/40 overflow-hidden pointer-events-none select-none opacity-20"
+                >
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-black/40"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    import gsap from 'gsap';
+
+    let startY: number | null = null;
+    let isDragging = false;
+
+    const section = document.querySelector('.whitee') as HTMLElement;
+    const lightnessEl = document.getElementById('lightness') as HTMLElement;
+    const bar = document.getElementById('light-bar') as HTMLElement;
+    const circles = gsap.utils.toArray('.light-circle') as HTMLElement[];
+
+    // Cache values only once on load
+    const lightnessRect = lightnessEl.getBoundingClientRect();
+    const top = lightnessRect.top;
+    const bottom = lightnessRect.bottom;
+    const normalizeLight = gsap.utils.normalize(bottom, top); // pre-bind normalizer
+
+    const updateVisuals = (value: number) => {
+        const clamped = Math.min(1, Math.max(0, value)); // clamp between 0-1
+        const percent = clamped * 100;
+
+        gsap.to(section, { backgroundColor: `oklch(${clamped} 0 0)`, duration: 0.2 });
+        gsap.to(bar, { height: `${percent}%`, duration: 0.2 });
+        gsap.set(circles, { opacity: `${percent}%` });
+    };
+
+    const animateScale = (scaleUp: boolean) => {
+        gsap.to(lightnessEl, {
+            scaleY: scaleUp ? 1.05 : 1,
+            scaleX: scaleUp ? 0.9 : 1,
+            yPercent: scaleUp ? -5 : 0,
+            duration: 0.3,
+            transformOrigin: '50% 100%'
+        });
+    };
+
+    lightnessEl.addEventListener('mouseenter', () => {
+        if (!isDragging) lightnessEl.style.cursor = 'grab';
+    });
+
+    lightnessEl.addEventListener('mouseleave', () => {
+        isDragging ? section.style.cursor = 'grabbing' : section.style.cursor = 'auto';
+    });
+
+    lightnessEl.addEventListener('mousedown', (e) => {
+        startY = e.clientY;
+
+        isDragging = true;
+        lightnessEl.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (startY === null) return;
+
+        const currentY = e.clientY - 12;
+        const lightnessValue = normalizeLight(currentY);
+
+        updateVisuals(lightnessValue);
+        animateScale(e.clientY < top);
+    });
+
+    document.addEventListener('mouseup', (e) => {
+        if (startY !== null) {
+            animateScale(false);
+            startY = null;
+
+            isDragging = false;
+            const rect = lightnessEl.getBoundingClientRect();
+            const isInside =
+                e.clientX >= rect.left &&
+                e.clientX <= rect.right &&
+                e.clientY >= rect.top &&
+                e.clientY <= rect.bottom;
+            section.style.cursor = isInside ? 'grab' : 'auto';
+        }
+    });
+</script>
+
+<style>
+    /* .white { */
+        /* background-color: oklch(0.2 0 0); */
+    /* } */
+</style>
