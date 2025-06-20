@@ -1,0 +1,125 @@
+---
+// Astro Layout wrapper
+import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+---
+
+<!-- <Layout> -->
+    <section class="w-full h-screen flex items-center justify-center bg-white overflow-hidden">
+        <div
+            id="range"
+            class="relative w-full max-w-xs text-black/50 outline-blue-400"
+            role="slider"
+            tabindex="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+            aria-valuetext="50%"
+            aria-orientation="horizontal"
+        >
+            <!-- Track -->
+            <div class="w-full h-3 bg-black/20 rounded-full border border-black/5 overflow-hidden">
+                <div id="fill" class="w-0/100 h-full bg-black"></div>
+            </div>
+            <!-- Ball -->
+            <div id="ball" class="absolute top-1.5 left-0/100 -translate-1/2 w-8 h-8 bg-black border-[0.35rem] border-white shadow-sm rounded-full">
+                <!-- ticket -->
+                <div id="ticket" class="absolute w-12 -top-12 left-0 -translate-x-[12px] bg-black text-white px-2 py-0.5 rounded-md text-lg flex justify-center">0</div>
+            </div>
+            <!-- Labels -->
+            <div class="absolute top-14/10 left-0">0</div>
+            <div class="absolute top-14/10 right-0">100</div>
+        </div>
+    </section>
+<!-- </Layout> -->
+
+<script>
+    import gsap from 'gsap';
+    import { Draggable } from 'gsap/Draggable';
+    gsap.registerPlugin(Draggable);
+
+    const range = document.getElementById('range') as HTMLElement;
+    const ball = document.getElementById('ball') as HTMLElement;
+    const fill = document.getElementById('fill') as HTMLElement;
+    const ticket = document.getElementById('ticket') as HTMLElement;
+
+    // Calculate custom bounds
+    const rangeRect = range.getBoundingClientRect();
+    const ballRect = ball.getBoundingClientRect();
+    const minX = rangeRect.left - ballRect.left - ballRect.width / 2;
+    const maxX = rangeRect.width;
+
+    // initial default
+    let currentValue = 0;
+    // for direction and speed - ticket
+    let lastX = 0;
+    // colors pallet
+    const colorStops = ['#ff0000', '#ff9900', '#00ff00']
+
+    const update = (x: number) => {
+        const percentage = Math.round((x / maxX) * 100);
+        currentValue = percentage;
+        const width = `${percentage}%`;
+
+        // Update fill width
+        // Compute dynamic fill color from red → green
+        const fillColor = gsap.utils.interpolate(colorStops, percentage / 100);
+        gsap.set(fill, {
+            width,
+            // backgroundColor: fillColor
+        });
+        ticket.innerText = percentage.toString();
+
+        // Accessibility
+        range.setAttribute('aria-valuenow', percentage.toString());
+        range.setAttribute('aria-valuetext', `${percentage}%`);
+        
+        // 🌀 Ticket rotation logic
+        const delta = (x - lastX) * -1;
+        const rotation = gsap.utils.clamp(-20, 20, delta * 2); // more speed = more tilt
+        gsap.to(ticket, {
+            rotateZ: rotation,
+            duration: 0.2,
+            ease: 'power2.out'
+        });
+
+        lastX = x;
+    };
+
+    Draggable.create(ball, {
+        type: 'x',
+        bounds: { minX, maxX },
+        onDrag: function () {
+            update(this.x);
+        },
+        onThrowUpdate: function () {
+            update(this.x);
+        },
+        onRelease: () => {
+            gsap.to(ticket, { rotateZ: 0, duration: 0.5, ease: 'elastic.out(1.5, 0.4)' });
+        }
+    });
+
+    // Enable keyboard accessibility
+    range.addEventListener('keydown', (e: KeyboardEvent) => {
+        const draggable = Draggable.get(ball);
+        if (!draggable) return;
+
+        const step = 5;
+        const minValue = 0;
+        const maxValue = 100;
+
+        if (e.key === 'ArrowRight') currentValue = Math.min(currentValue + step, maxValue);
+        if (e.key === 'ArrowLeft') currentValue = Math.max(currentValue - step, minValue);
+        if (e.key === 'Home') currentValue = minValue;
+        if (e.key === 'End') currentValue = maxValue;
+
+        // Convert value to position
+        const newX = (currentValue / 100) * maxX;
+
+        // Move and update
+        gsap.set(ball, { x: newX });
+        update(newX);
+        gsap.to(ticket, { rotateZ: 0, duration: 0.5, ease: 'elastic.out(0.5, 0.5)', delay: 0.1 });
+    });
+</script>
