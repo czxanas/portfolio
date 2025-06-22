@@ -1,0 +1,280 @@
+---
+import "../styles/global.css";
+---
+
+<section
+    class="w-full h-full flex items-center justify-center bg-black/2 overflow-hidden"
+>
+    <div
+        id="pilot"
+        tabindex="0"
+        class="fixed top-0 right-2 sm:left-6/100 -translate-y-1/2 w-9 sm:w-14 h-7.5 bg-yellow-300/60 outline-blue-500 focus:outline-4 border-4 border-black rounded-lg z-100 flex justify-evenly items-end"
+    >
+        <div class="h-1/3 w-0.25 bg-black"></div>
+        <div class="h-1/3 w-0.25 bg-black"></div>
+        <div class="h-1/3 w-0.25 bg-black"></div>
+        <div class="h-1/3 w-0.25 bg-black"></div>
+        <div class="h-1/3 w-0.25 bg-black"></div>
+    </div>
+    <main
+        class="fixed w-9/10 h-9/10 top-1/2 left-1/2 -translate-1/2 bg-white shadow-xl rounded-3xl overflow-hidden"
+    >
+        <div
+            class="fixed top-0 left-0 w-full py-4 pl-4 flex items-center gap-2 z-50 backdrop-blur-3xl"
+        >
+            <div class="w-4 h-4 rounded-full bg-red-500"></div>
+            <div class="w-4 h-4 rounded-full bg-orange-400"></div>
+            <div class="w-4 h-4 rounded-full bg-green-400"></div>
+        </div>
+
+        <section id="section" class="relative w-full h-full overflow-y-auto">
+            <!-- <div id="pilot" class="fixed top-0 right-0 md:left-4 -translate-y-1/2 w-7.5 md:w-14 h-7.5 bg-yellow-300/60 border-4 border-black rounded-lg z-100 flex justify-evenly items-end">
+                    <div class="h-1/3 w-0.25 bg-black"></div>
+                    <div class="h-1/3 w-0.25 bg-black"></div>
+                    <div class="h-1/3 w-0.25 bg-black"></div>
+                    <div class="h-1/3 w-0.25 bg-black"></div>
+                    <div class="h-1/3 w-0.25 bg-black"></div>
+                </div> -->
+            <div
+                id="helper"
+                class="fixed top-0 left-1/2 -translate-x-1/2 h-7.5 w-120 bg-yellow-300/60 rounded-lg"
+            >
+            </div>
+
+            <article
+                class="relative w-full max-w-md px-4 mx-auto mt-30 mb-40 flex flex-col gap-10"
+            >
+                <p class="text-6xl font-semibold">Helper line</p>
+                <p class="relative text-black/80 text-lg">
+                    Sometimes, the simplest tools leave the deepest impact.
+                    Think of someone reading a dense book or a long article, to
+                    stay focused, they place a ruler beneath the line they're
+                    reading, blocking out the noise above and below. It's not
+                    about precision, it's about presence. That small, analog
+                    gesture helps the mind lock into the text without
+                    distraction. It creates rhythm, clarity, and calm. That's
+                    the spirit behind this feature, bringing that same kind of
+                    tactile focus to the web, not by mimicking the ruler, but by
+                    honoring its purpose.
+                </p>
+                <p class="relative text-black/80 text-lg">
+                    As the user scrolls through an article or a block of text,
+                    they can drag a subtle "pilot", a control element that
+                    moves vertically. Following that motion is a soft,
+                    responsive helper line that gently snaps to the nearest line
+                    of text. There's no rigid grid, no clunky input, just
+                    smooth, dynamic alignment. Like a digital ruler that
+                    breathes. It tracks where the eye might want to go next,
+                    keeping the user anchored to the line they're reading. Every
+                    movement feels intentional, every snap to a new line feels
+                    like a natural continuation of thought, not a mechanical
+                    jump, but a visual whisper that says: "Here's where you
+                    are."
+                </p>
+                <p class="relative text-black/80 text-lg">
+                    In moments like these, design becomes invisible, not by
+                    disappearing, but by becoming intuitive. The user doesn't
+                    need to think about how it works. They just feel supported,
+                    seen, and guided. Whether it's someone with ADHD looking for
+                    visual structure, or simply a curious mind diving into
+                    long-form content, this interaction creates space for focus.
+                    It's not just about making something interactive, it's
+                    about bringing clarity to the reading experience, turning a
+                    passive scroll into an active engagement with the text, one
+                    meaningful line at a time.
+                </p>
+            </article>
+        </section>
+    </main>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { Draggable } from "gsap/Draggable";
+    import { InertiaPlugin } from "gsap/InertiaPlugin";
+    import { SplitText } from "gsap/SplitText";
+    gsap.registerPlugin(Draggable, InertiaPlugin, SplitText);
+
+    const pilot = document.getElementById("pilot") as HTMLElement;
+    const helper = document.getElementById("helper") as HTMLElement;
+    const main = document.querySelector("main") as HTMLElement;
+    const section = document.getElementById("section") as HTMLElement;
+
+    pilot.addEventListener("click", () => console.log("Hello World!")); // I need to handle the color, here or in the parameter
+
+    let split = SplitText.create("p", {
+        type: "lines",
+        linesClass: "line",
+        autoSplit: true,
+    });
+
+    const checkBoundsAndSnap = (y: number) => {
+        const { top: pilotTop, bottom: pilotBottom } =
+            pilot.getBoundingClientRect();
+        const { top: wrapTop, bottom: wrapBottom } =
+            main.getBoundingClientRect();
+        // If pilot is outside main (either top or bottom)
+        if (pilotTop < wrapTop || pilotBottom > wrapBottom) {
+            // Calculate new y to bring pilot *just inside* main
+            const newY =
+                pilotTop < wrapTop
+                    ? y + (wrapTop - pilotTop)
+                    : y - (pilotBottom - wrapBottom);
+
+            gsap.to(pilot, {
+                y: newY,
+                duration: 0.3,
+                ease: "power2.out",
+            });
+
+            gsap.to(helper, {
+                y: newY,
+                duration: 0.3,
+                ease: "power2.out",
+            });
+        }
+    };
+
+    // const updateHelperToClosestLine = () => {
+    //     const pilotRect = pilot.getBoundingClientRect();
+    //     const pilotCenterY = pilotRect.top + pilotRect.height / 2;
+
+    //     let closestLine: HTMLElement | null | any = null;
+    //     let closestDistance = Infinity;
+
+    //     split.lines.forEach((line: HTMLElement | any) => {
+    //         const lineRect = line.getBoundingClientRect();
+    //         const lineCenterY = lineRect.top + lineRect.height / 2;
+    //         const distance = Math.abs(pilotCenterY - lineCenterY);
+
+    //         if (distance < closestDistance) {
+    //             closestDistance = distance;
+    //             closestLine = line;
+    //         }
+    //     });
+
+    //     if (closestLine) {
+    //         const { top, height } = closestLine.getBoundingClientRect();
+    //         const mainTop = main.getBoundingClientRect().top;
+    //         const relativeY = top - mainTop;
+
+    //         gsap.to(helper, {
+    //             y: relativeY,
+    //             height: height,
+    //             duration: 0.25,
+    //             ease: 'power2.out'
+    //         });
+    //     }
+    // };
+
+    const updateHelperToClosestLine = () => {
+        const pilotRect = pilot.getBoundingClientRect();
+        const pilotCenterY = pilotRect.top + pilotRect.height / 2;
+
+        let closestLine: HTMLElement | null | any = null;
+        let closestDistance = Infinity;
+
+        split.lines.forEach((line) => {
+            const rect = line.getBoundingClientRect();
+            const centerY = rect.top + rect.height / 2;
+            const dist = Math.abs(pilotCenterY - centerY);
+
+            if (dist < closestDistance) {
+                closestDistance = dist;
+                closestLine = line;
+            }
+        });
+
+        const { top, height } = closestLine.getBoundingClientRect();
+        const mainTop = main.getBoundingClientRect().top;
+        const relativeY = top - mainTop;
+
+        gsap.to(helper, {
+            y: relativeY,
+            height,
+            duration: 0.25,
+            ease: "power2.out",
+        });
+    };
+
+    Draggable.create(pilot, {
+        type: "y",
+        bounds: document.querySelector("article"),
+        inertia: true,
+        // edgeResistance: 1,
+        throwResistance: 7000,
+        // overshootTolerance: 0.1,
+
+        // onDrag: function () {
+        //     gsap.to(helper, {
+        //         y: this.y,
+        //         duration: 0.3,
+        //         ease: 'power2.out'
+        //     });
+        // },
+
+        // onThrowUpdate: function () {
+        //     gsap.to(helper, {
+        //         y: this.y,
+        //         duration: 0.3,
+        //         ease: 'power2.out'
+        //     });
+        // },
+
+        onDrag: function () {
+            updateHelperToClosestLine();
+        },
+
+        onThrowUpdate: function () {
+            updateHelperToClosestLine();
+        },
+
+        onThrowComplete: function () {
+            checkBoundsAndSnap(this.y);
+        },
+    });
+
+    // section.addEventListener('scroll', updateHelperToClosestLine)
+    // let ticking = false;
+    // section.addEventListener('scrollend', () => {
+    //     if (!ticking) {
+    //         requestAnimationFrame(() => {
+    //             updateHelperToClosestLine();
+    //             ticking = false;
+    //         });
+    //         ticking = true;
+    //     }
+    // });
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    section.addEventListener("scroll", () => {
+        clearTimeout(scrollTimeout); // reset on each scroll
+        scrollTimeout = setTimeout(() => {
+            // This runs ~150ms after user stops scrolling
+            updateHelperToClosestLine();
+        }, 150); // adjust delay if needed
+    });
+
+    const lineHeight = 24; // or use getComputedStyle if dynamic
+
+    pilot.addEventListener("keydown", (e) => {
+        let currentY = gsap.getProperty(pilot, "y") as number;
+
+        if (e.key === "ArrowDown") {
+            gsap.to(pilot, {
+                y: currentY + lineHeight,
+                duration: 0.25,
+                ease: "power2.out",
+                onUpdate: updateHelperToClosestLine,
+            });
+        }
+
+        if (e.key === "ArrowUp") {
+            gsap.to(pilot, {
+                y: currentY - lineHeight,
+                duration: 0.25,
+                ease: "power2.out",
+                onUpdate: updateHelperToClosestLine,
+            });
+        }
+    });
+</script>
