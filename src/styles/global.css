@@ -16,7 +16,7 @@ html {
     /* @apply font-rubik leading-[1.25rem]; */
     @apply font-mono leading-[1.4rem];
     font-weight: 400;
-    font-size: clamp(14px, .5vw, 24px);
+    font-size: clamp(1rem, .5vw, 1.5rem);
 }
 
 body {
