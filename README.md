@@ -1,6 +1,6 @@
-# Anas – Creative Frontend Developer 🚀  
+# Anas – UX Engineer 🚀  
 
-Welcome to my portfolio! I'm a frontend developer passionate about crafting **immersive, high-performance web experiences**. My work blends **smooth animations, interactive UI design, and cutting-edge web technologies** to create engaging digital experiences.  
+Welcome to my portfolio! I'm a UX Engineer passionate about crafting **immersive, high-performance web experiences**. My work blends **smooth animations, interactive UI design, and cutting-edge web technologies** to create engaging digital experiences.  
 
 ## 🔥 About Me  
 - **Specialized in:** Astro, React (Next.js, TypeScript), GSAP, Webflow & more.  
