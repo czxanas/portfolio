@@ -18,6 +18,7 @@ Welcome to my portfolio! I'm a UX Engineer passionate about crafting **immersive
 ## 📫 Get in Touch  
 - 🌐 **[Portfolio](https://helloanas.vercel.app/)**  
 - 🐦 **[eMail](mailto:anas.frontdev@gmail.com)**  
-- 💼 **[LinkedIn](https://www.linkedin.com/in/anas-frontdev/)**  
+- 💼 **[LinkedIn](https://www.linkedin.com/in/anas-frontdev/)**
+- 💼 **[X](https://x.com/czxanas)**  
 
 Feel free to explore my work, and let's build something awesome! 🚀  
